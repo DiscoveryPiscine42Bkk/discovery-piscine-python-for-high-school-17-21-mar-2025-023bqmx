@@ -1,7 +1,7 @@
 print("Give me the first number: ")
-num1 = int(input())
+num1 = float(input())
 print("Give me the second number: ")
-num2 = int(input())
+num2 = float(input())
 print("Thank You!")
 try:
     print(f"{num1} + {num2} = {num1 + num2}")
