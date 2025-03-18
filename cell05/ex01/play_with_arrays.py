@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 array01 =  [2, 8, 9, 48, 8, 22, -12, 2]
 array02 = [i+2  for i in array01]
 

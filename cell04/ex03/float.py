@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 def check_number_type(number_str):
   
   try:

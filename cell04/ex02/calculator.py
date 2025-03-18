@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 print("Give me the first number: ")
 num1 = float(input())
 print("Give me the second number: ")
