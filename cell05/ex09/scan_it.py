@@ -1,9 +1,13 @@
 #!/usr/bin/env python3
 
 import sys
+import re
 
-if len(sys.argv) <3:
+if len(sys.argv) !=3:
     print("none")
 else:
-    input = len(sys.argv[1:])
-    print(input)
+    a = sys.argv[1]
+    sent = sys.argv[2]
+    
+    sum = re.findall(a,sent)
+    print(len(sum))
