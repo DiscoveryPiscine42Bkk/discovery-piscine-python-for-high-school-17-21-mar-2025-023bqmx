@@ -2,14 +2,13 @@
 
 import sys
 
-if len(sys.argv) == 2:
+if len(sys.argv) == 2 :
     para = sys.argv[1]
-    userinput = input("What was the parameter? ")
+    userinput = input("What was the parameter? : ")
 
-    if para == userinput
+    if para == userinput:
         print("Good job!")
     else:
         print("Nope, sorry...")
-
-elif len(sys.argv) != 2:
+else:
     print("none")
