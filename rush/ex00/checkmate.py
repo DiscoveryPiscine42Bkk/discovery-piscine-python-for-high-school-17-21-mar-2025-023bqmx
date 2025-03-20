@@ -67,9 +67,14 @@ def checkmate(board):
         print(i)
         
         king_count = sum(row.count('K') for row in board)
+    
     if king_count > 1:
             print("Error")
             return False
+    
+    if king_count != 1:
+        print("Bro... I Can't find my King ")
+        return False
     
     if not valid_board(board):
         return  # Stop when it have wrong word
