@@ -1,6 +1,6 @@
 def validate_board(board):
-    """ตรวจสอบว่ากระดานมีตัวอักษรที่ไม่ถูกต้องหรือไม่"""
-    valid_pieces = {'P', 'R', 'Q', 'B', 'K', '.'}  # ตัวหมากรุกที่ถูกต้อง
+    # Check if the board has any invalid letters.
+    valid_pieces = {'P', 'R', 'Q', 'B', 'K', '.' , '|'} 
     for row in board:
         for piece in row:
             if piece not in valid_pieces:
@@ -9,7 +9,7 @@ def validate_board(board):
     return True
 
 def find_king(board):
-    """ค้นหาตำแหน่งของ King (K)"""
+    """King position"""
     for r in range(len(board)):
         for c in range(len(board[r])):
             if board[r][c] == 'K':
@@ -17,17 +17,17 @@ def find_king(board):
     return None
 
 def is_under_attack(board, king_r, king_c):
-    """ตรวจสอบว่า King ถูกโจมตีหรือไม่"""
+    """Check if king has been attacked"""
     size = len(board)
 
-    # ตรวจสอบ Pawn (P) - โจมตีเฉพาะแนวทแยงด้านหน้า #fix this
+    # check pawn
     if king_r > 0:
-     if king_c > 0 and board[king_r + 1][king_c + 1] == 'P':
+     if king_c > 0 and board[king_r + 1][king_c + 1] == 'P': #left diagonal
             return True
-    if king_c < size - 1 and board[king_r + 1][king_c - 1] == 'P':
+    if king_c < size - 1 and board[king_r + 1][king_c - 1] == 'P': #right diagonal
             return True
 
-    # ตรวจสอบ Rook (R) และ Queen (Q) - แนวตรง
+    # Check rook and queen in straight direction
     for d_r, d_c in [(1, 0), (-1, 0), (0, 1), (0, -1)]:
         r, c = king_r, king_c
         while 0 <= r < size and 0 <= c < size:
@@ -36,10 +36,10 @@ def is_under_attack(board, king_r, king_c):
             if 0 <= r < size and 0 <= c < size:
                 if board[r][c] == 'R' or board[r][c] == 'Q':
                     return True
-                if board[r][c] != '.':  # หยุดถ้ามีสิ่งกีดขวาง
+                if board[r][c] != '.':  # stop when it found something
                     break
 
-    # ตรวจสอบ Bishop (B) และ Queen (Q) - แนวทแยง
+    # Check rook and queen in diagonal direction
     for d_r, d_c in [(1, 1), (1, -1), (-1, 1), (-1, -1)]:
         r, c = king_r, king_c
         while 0 <= r < size and 0 <= c < size:
@@ -48,23 +48,27 @@ def is_under_attack(board, king_r, king_c):
             if 0 <= r < size and 0 <= c < size:
                 if board[r][c] == 'B' or board[r][c] == 'Q':
                     return True
-                if board[r][c] != '.':  # หยุดถ้ามีสิ่งกีดขวาง
+                if board[r][c] != '.':  # stop when it found something
                     break
 
     return False
 
 def checkmate(board):
-    """ตรวจสอบว่า King ถูกโจมตีหรือไม่"""
+    """Check if king has been attacked"""
+    
+    for i in board:
+        print(i)
+    
     if not validate_board(board):
-        return  # หยุดทำงานถ้ากระดานมีตัวอักษรผิด
+        return  # Stop when it have wrong word
 
     king_position = find_king(board)
     if not king_position:
-        print("Fail")  # ไม่มี King ในกระดาน
+        print("Fail")  # Not have king
         return
     
     king_r, king_c = king_position
     if is_under_attack(board, king_r, king_c):
-        print("Success")  # King อยู่ใน "Check"
+        print("Success")  # King in check
     else:
-        print("Fail")  # King ปลอดภัย
+        print("Fail")  # King is safe  
